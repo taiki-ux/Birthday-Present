@@ -1,0 +1,3 @@
+Put your photos in this folder with these names (or edit the names in index.html, CONFIG at the top of the script):
+royda-1.jpg  royda-2.jpg  us-1.jpg  us-2.jpg
+Tip: resize photos to about 1200px wide so the page loads fast on phones.

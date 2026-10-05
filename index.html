@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e0b1f">
+<title>A Gift for Royda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--ink:#0e0b1f;--cream:#f6ecdc;--rose:#f0a3b5;--gold:#d9b26f;--f:'Fraunces',Georgia,serif;--s:'Figtree',system-ui,sans-serif}
+html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--cream);font:17px/1.6 var(--s);-webkit-tap-highlight-color:transparent}
+body{transition:background-color 1.2s}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(60% 45% at 18% 8%,rgba(120,100,220,.38),transparent),radial-gradient(55% 45% at 88% 92%,rgba(240,163,181,.24),transparent);transition:opacity 1.2s}
+body.t-warm{background:#1f1236}
+body.t-dark{background:#06040d}
+body.t-dark::before{opacity:.2}
+#c{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.scene{position:fixed;inset:0;display:flex;padding:calc(env(safe-area-inset-top) + 4.2rem) 1.4rem calc(env(safe-area-inset-bottom) + 6.2rem);overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .6s,transform .6s,visibility 0s .6s;text-align:center}
+.scene.on{opacity:1;visibility:visible;transform:none;transition:opacity .8s .15s,transform .8s .15s}
+.in{margin:auto;width:100%;max-width:33rem;display:flex;flex-direction:column;align-items:center;gap:1.3rem}
+h2{font:500 2rem/1.15 var(--f);letter-spacing:-.01em}
+.sub{opacity:.75;font-size:.95rem}
+.btn{min-height:54px;padding:.8rem 1.7rem;border-radius:999px;border:1px solid rgba(217,178,111,.65);background:rgba(246,236,220,.07);font-weight:600;backdrop-filter:blur(6px);transition:transform .2s,background .2s}
+.btn:active{transform:scale(.96)}
+.btn.pri{background:linear-gradient(135deg,var(--rose),var(--gold));color:#2a1630;border:0;box-shadow:0 8px 30px rgba(240,163,181,.28)}
+.fade{opacity:0;transition:opacity 1.7s;font:italic 400 1.45rem/1.4 var(--f)}.fade.show{opacity:1}
+.big-name{font:500 clamp(2.2rem,10vw,3.4rem)/1.1 var(--f)}
+.stage{display:flex;flex-direction:column;gap:1.1rem;width:100%}
+.ln{font:italic 400 1.3rem/1.5 var(--f);animation:in 1.1s both;transition:opacity .9s}
+.ln.old{opacity:.38}.ln.q{color:var(--rose)}.ln.big{font-size:1.9rem;color:var(--gold);font-style:normal;font-weight:500}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%}
+.card{position:relative;padding:1.1rem .8rem 1.4rem;border-radius:20px 20px 20px 6px;border:1px solid rgba(246,236,220,.18);background:rgba(246,236,220,.06);text-align:left;transition:transform .3s,border-color .3s,background .3s}
+.card:nth-child(odd){transform:rotate(-1.2deg)}.card:nth-child(even){transform:rotate(1.4deg)}
+.card:last-child{grid-column:1/-1;text-align:center;border-radius:20px}
+.card b{display:block;font:500 1.05rem/1.25 var(--f)}.card span{font-size:.82rem;opacity:.7}
+.card::after{content:"✓ confirmed";position:absolute;right:.8rem;bottom:.4rem;font-size:.7rem;color:var(--gold);opacity:0;transition:opacity .3s}
+.card.on{border-color:var(--gold);background:rgba(217,178,111,.13);transform:rotate(0) scale(1.03)}.card.on::after{opacity:1}
+.card:last-child::after{left:0;right:0;text-align:center}
+#fam{display:none;position:relative;flex-direction:column;align-items:center;gap:1rem}#fam.show{display:flex}
+.quote{position:relative;font:italic 500 clamp(2.8rem,14vw,4.4rem)/1.05 var(--f);color:var(--gold);background:none;border:0;animation:pop 1s both;text-shadow:0 0 40px rgba(217,178,111,.35)}
+@keyframes pop{0%{opacity:0;transform:scale(.7) rotate(-4deg)}60%{transform:scale(1.06)}100%{opacity:1}}
+.stamp{position:absolute;left:50%;top:50%;padding:.2rem .7rem;border:3px solid var(--rose);border-radius:8px;color:var(--rose);font:700 .95rem var(--s);white-space:nowrap;transform:translate(-50%,-50%) rotate(-10deg) scale(2);opacity:0;transition:.35s;pointer-events:none;background:rgba(14,11,31,.55)}
+.quote.on .stamp{opacity:1;transform:translate(-50%,-50%) rotate(-10deg) scale(1)}
+#fam .ln{display:none}#fam.two .ln{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%}
+figure{position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#3b2c66,#6b3b5e);cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+figure:nth-child(even){margin-top:1.2rem}
+figure img{width:100%;height:100%;object-fit:cover;display:block}
+figure.ph::after{content:"Your photo here";position:absolute;inset:0;display:grid;place-items:center;font-size:.9rem;opacity:.65}
+figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .7rem .6rem;font-size:.74rem;line-height:1.3;text-align:left;background:linear-gradient(transparent,rgba(6,4,13,.85));z-index:1}
+#lb{position:fixed;inset:0;z-index:20;background:rgba(6,4,13,.94);display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1rem}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:70dvh;border-radius:14px;object-fit:contain}
+#lb .ph{width:min(80vw,22rem);aspect-ratio:4/5;border-radius:14px;background:linear-gradient(160deg,#3b2c66,#6b3b5e);display:none;place-items:center;opacity:.8}
+#lb.nophoto .ph{display:grid}#lb.nophoto img{display:none}
+.lbn{display:flex;gap:1rem;align-items:center}
+.circ{width:52px;height:52px;border-radius:50%;border:1px solid rgba(246,236,220,.3);background:rgba(246,236,220,.08);font-size:1.4rem}
+.paper{display:none;width:100%;text-align:left;background:#f6ecdc;color:#35272b;border-radius:6px 22px 6px 22px;padding:1.7rem 1.4rem;font:400 1.04rem/1.75 var(--f);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.paper.show{display:block}.paper p{margin-bottom:1rem;animation:in 1.1s both}.paper .to{font:italic 600 1.35rem var(--f);color:#8a3b52}
+.paper .sg{font-style:italic;margin-top:1.2rem}
+.final{font:500 clamp(2.4rem,11vw,3.6rem)/1.1 var(--f);text-shadow:0 0 50px rgba(240,163,181,.5);animation:in 1.6s both}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;align-items:center;gap:.9rem;padding:.8rem 1rem calc(env(safe-area-inset-bottom) + .9rem);transition:opacity .5s}
+#nav.off{opacity:0;pointer-events:none}
+#dots{display:flex;gap:.45rem}#dots button{width:10px;height:10px;padding:0;border-radius:50%;border:0;background:rgba(246,236,220,.3);position:relative;transition:.3s}
+#dots button::before{content:"";position:absolute;inset:-12px -4px}
+#dots button.on{background:var(--rose);width:22px;border-radius:6px}
+#mu{position:fixed;top:calc(env(safe-area-inset-top) + .8rem);right:.9rem;z-index:10;width:46px;height:46px;font-size:1.1rem}
+#mu.play{border-color:var(--gold);box-shadow:0 0 18px rgba(217,178,111,.5)}
+#toast{position:fixed;left:50%;bottom:6rem;transform:translateX(-50%);background:rgba(246,236,220,.95);color:#2a1630;padding:.5rem 1rem;border-radius:99px;font-size:.85rem;opacity:0;transition:opacity .4s;z-index:30;pointer-events:none}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+@media(min-width:760px){.scene{padding-top:5rem}h2{font-size:2.6rem}.ln{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<button class="circ" id="mu" aria-label="Music on or off" aria-pressed="false" hidden>♪</button>
+
+<!-- OPENING -->
+<section class="scene on" id="s0" data-theme="">
+ <div class="in">
+  <p class="fade big-name" id="i1">Royda Kaputa...</p>
+  <p class="fade" id="i2">There's something I wanted to give you this year...</p>
+  <p class="fade" id="i3">But I couldn't wrap it in a box.</p>
+  <button class="btn pri fade" id="open" style="font:600 1rem var(--s)">Open your birthday gift ✨</button>
+ </div>
+</section>
+
+<!-- CHAPTER 1 -->
+<section class="scene" id="s1" data-theme="t-warm">
+ <div class="in">
+  <h2>Today is About You</h2>
+  <p class="big-name" style="color:var(--rose)">Happy Birthday, Kaputa ❤️</p>
+  <p class="ln" style="font-size:1.2rem;animation-delay:.6s">Today we celebrate you. Not what you've done or what's next, just you, and how much you have grown for the past 20 years.</p>
+  <p class="sub">Twenty years of you. We're glad you're here.</p>
+  <button class="btn" data-go="1">Tap for a little surprise ✨</button>
+ </div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="scene" id="s2" data-theme="">
+ <div class="in">
+  <h2>The Royda Files 😂</h2>
+  <p class="sub" id="fileHint">Tap each card to confirm. Official records.</p>
+  <div class="cards">
+   <button class="card"><b>Professional Talker™</b><span>Never runs out of things to say</span></button>
+   <button class="card"><b>Certified Comedian</b><span>Audience: everyone nearby</span></button>
+   <button class="card"><b>Kindness Department</b><span>Permanently open</span></button>
+   <button class="card"><b>Full-Time Happiness Distributor</b><span>No days off</span></button>
+   <button class="card"><b>Chief Complainer</b><span>Main complaint: "I know nothing."</span></button>
+  </div>
+  <div id="fam">
+   <p class="sub">Her most famous sentence...</p>
+   <button class="quote" id="quote">"I know nothing."<span class="stamp">FACT CHECK: FALSE</span></button>
+   <p class="sub">(tap it)</p>
+   <p class="ln q" style="font-size:1.35rem">"And yet somehow, you keep making the people around you proud."</p>
+  </div>
+  <button class="btn" id="famBtn">Her most famous sentence...</button>
+ </div>
+</section>
+
+<!-- CHAPTER 3 -->
+<section class="scene" id="s3" data-theme="t-warm"><div class="in"><h2>Things I Don't Always Say</h2><div class="stage"></div><button class="btn more"></button></div></section>
+
+<!-- CHAPTER 4 -->
+<section class="scene" id="s4" data-theme=""><div class="in"><h2>For Your Next Chapter 🌱</h2><div class="stage"></div><button class="btn more"></button></div></section>
+
+<!-- CHAPTER 5 -->
+<section class="scene" id="s5" data-theme="">
+ <div class="in">
+  <h2>A Few Memories 📸</h2>
+  <p class="sub">Tap a photo to see it bigger.</p>
+  <div class="grid" id="grid"></div>
+ </div>
+</section>
+
+<!-- CHAPTER 6 -->
+<section class="scene" id="s6" data-theme="t-dark">
+ <div class="in">
+  <p class="ln" style="font-size:1.5rem" id="bl">Before you leave...</p>
+  <button class="btn" id="one">There's one thing you should know.</button>
+  <div class="stage" id="st6"></div>
+  <button class="btn pri" id="to7" hidden>Read my letter</button>
+ </div>
+</section>
+
+<!-- LETTER -->
+<section class="scene" id="s7" data-theme="t-warm">
+ <div class="in">
+  <button class="btn pri" id="env">✉️ A letter for you</button>
+  <article class="paper" id="paper">
+   <p class="to">Dear Royda Kaputa,</p>
+   <p>Happy birthday! I wanted to give you something more than a normal message this year, so I made this. I couldn't wrap a website, but I tried my best.</p>
+   <p>I've known you for a very long time, and over the years you've become someone really close to me. You're family in a way that goes past the title. That's why I do not call you "mom".</p>
+   <p>You're funny, you talk a lot (in the best way), and you're one of the kindest people I know. You always try to make everyone around you laugh, and it works. Honestly, it's one of my favorite things about you.</p>
+   <p>And yes, I know. You "know nothing." I've heard it enough times to know it isn't true. You may not know everything, but you know how to make people feel happy and welcome, and that counts for a lot.</p>
+   <p>I know things haven't been easy lately with university thing. I won't pretend to have all the answers, but I do believe in you. You don't need your whole future figured out today. Take it one step at a time, and know I'm in your corner.</p>
+   <p>Thank you for being part of my life. I'm really glad you are. I hope your birthday is full of laughter and people who love you.</p>
+   <p>Happy Birthday, Royda. ❤️</p>
+   <p class="sg">With love,<br>Taiki</p>
+  </article>
+ </div>
+</section>
+
+<!-- FINAL -->
+<section class="scene" id="s8" data-theme="t-dark">
+ <div class="in">
+  <p class="final">Happy Birthday, Royda ❤️</p>
+  <p class="ln" style="font-size:1.5rem;animation-delay:1.4s">Thank you for being you.</p>
+  <p class="ln q" style="animation-delay:2.4s">— Taiki</p>
+  <button class="btn" data-go="back" style="margin-top:1rem">Start the journey again</button>
+ </div>
+</section>
+
+<nav id="nav" class="off">
+ <button class="circ" id="bk" aria-label="Back">‹</button>
+ <div id="dots"></div>
+ <button class="circ" id="nx" aria-label="Next">›</button>
+</nav>
+
+<div id="lb" role="dialog" aria-label="Photo">
+ <div class="ph">Your photo here</div><img alt="">
+ <p class="sub" id="lbc"></p>
+ <div class="lbn"><button class="circ" id="lp" aria-label="Previous photo">‹</button><button class="btn" id="lx">Close</button><button class="circ" id="ln" aria-label="Next photo">›</button></div>
+</div>
+<div id="toast"></div>
+
+<script>
+/* ============ EASY EDIT AREA ============
+   PHOTOS: put your pictures in the "images" folder and match the file names below
+   (or change the names). Add or remove lines freely.
+   MUSIC (optional): put one mp3 in the "audio" folder named music.mp3.
+   If there is no file, the music button simply stays hidden. */
+const CONFIG={
+ music:'music.mp3',
+ photos:[
+  {src:'royda-1.jpg',cap:'A moment worth keeping.'},
+  {src:'us-1.jpg',cap:'One of those little moments that becomes a memory.'},
+  {src:'royda-2.jpg',cap:'A moment worth keeping.'},
+  {src:'us-2.jpg',cap:'One of those little moments that becomes a memory.'}
+ ]
+};
+/* ========================================= */
+
+const $=id=>document.getElementById(id),S=[...document.querySelectorAll('.scene')],H={},T=[];
+let cur=0;
+const clear=()=>{T.splice(0).forEach(clearTimeout)},later=(f,ms)=>T.push(setTimeout(f,ms));
+
+/* navigation */
+const dots=$('dots');
+for(let i=1;i<S.length;i++){const d=document.createElement('button');d.setAttribute('aria-label','Go to part '+i);d.onclick=()=>go(i);dots.appendChild(d)}
+function go(n){
+ n=Math.max(0,Math.min(S.length-1,n));clear();
+ S[cur].classList.remove('on');cur=n;const s=S[n];s.classList.add('on');s.scrollTop=0;
+ document.body.className=s.dataset.theme;
+ $('nav').classList.toggle('off',n===0);$('nx').hidden=n===S.length-1;
+ [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===n-1));
+ H['s'+n]&&H['s'+n]();
+}
+$('bk').onclick=()=>go(cur-1);$('nx').onclick=()=>go(cur+1);
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{b.dataset.go==='back'?go(1):burst(40)});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);if(e.key==='Escape')closeLb()});
+
+/* opening */
+H.s0=()=>{['i1','i2','i3','open'].forEach(i=>$(i).classList.remove('show'));
+ [['i1',600],['i2',2600],['i3',5200],['open',7200]].forEach(([i,t])=>later(()=>$(i).classList.add('show'),t))};
+$('open').onclick=()=>{burst(50);go(1)};
+
+/* tap-through chapters */
+function tapSeq(id,lines,last){
+ const sc=$(id),st=sc.querySelector('.stage'),b=sc.querySelector('.more');let i=0;
+ b.onclick=()=>{
+  if(i>=lines.length)return go(cur+1);
+  st.querySelectorAll('.ln').forEach(x=>x.classList.add('old'));
+  const [t,c]=[].concat(lines[i]),p=document.createElement('p');p.className='ln '+(c||'');p.textContent=t;st.appendChild(p);i++;
+  b.textContent=i<lines.length?'Tap to continue':last;
+  setTimeout(()=>sc.scrollTo({top:sc.scrollHeight,behavior:'smooth'}),60);
+ };
+ H[id]=()=>{i=0;st.innerHTML='';b.click()};
+}
+tapSeq('s3',[
+ "I've known you for a very long time.",
+ "Long enough but i still don't know you very well.",
+ "All i know is that you are kind person who think of others before you think of yourself.",
+ "I don't always say it out loud.",
+ ["So I'm saying it here: I'm really glad you're in my life.",'q'],
+ "Your kindness, your humor, the way you make people laugh. Those things matter more than you probably realize."
+],'Next chapter');
+tapSeq('s4',[
+ "From here life will be getting harder.",
+ "You will be having tough chooses to make, like the one you have right now.",
+ "Be Tougher.",
+ "You don't have to have everything figured out.",
+ "You don't have to know exactly where life is taking you.",
+ "Sometimes the path becomes clearer only after we start walking.",
+ ['"Whatever bad thing happens, don\'t let one difficult chapter convince you that you aren\'t capable of writing a beautiful story."','q'],
+ ['Keep going, Royda.','big'],
+ "There are people who believe in you."
+],'Continue');
+
+/* chapter 2 */
+const cards=[...document.querySelectorAll('.card')];
+cards.forEach(c=>c.onclick=()=>{c.classList.toggle('on');if(c.classList.contains('on'))burst(6)});
+$('famBtn').onclick=e=>{e.target.hidden=true;$('fam').classList.add('show');$('fam').classList.remove('two');
+ later(()=>{$('fam').classList.add('two');$('fam').scrollIntoView({behavior:'smooth',block:'end'})},2600);
+ setTimeout(()=>$('fam').scrollIntoView({behavior:'smooth',block:'center'}),80)};
+$('quote').onclick=()=>$('quote').classList.toggle('on');
+H.s2=()=>{cards.forEach(c=>c.classList.remove('on'));$('fam').classList.remove('show','two');$('famBtn').hidden=false;$('quote').classList.remove('on')};
+
+/* gallery + lightbox */
+const P=CONFIG.photos;let li=0;
+P.forEach((p,i)=>{
+ const f=document.createElement('figure'),im=new Image();im.loading='lazy';im.alt=p.cap;im.src=p.src;
+ im.onerror=()=>{f.classList.add('ph');im.remove();p.missing=true};
+ const c=document.createElement('figcaption');c.textContent=p.cap;f.append(im,c);f.onclick=()=>openLb(i);grid.appendChild(f)});
+function openLb(i){li=(i+P.length)%P.length;const p=P[li],im=document.querySelector('#lb img');
+ $('lb').classList.toggle('nophoto',!!p.missing);im.src=p.missing?'':p.src;$('lbc').textContent=p.cap;$('lb').classList.add('on')}
+function closeLb(){$('lb').classList.remove('on')}
+$('lx').onclick=closeLb;$('lp').onclick=()=>openLb(li-1);$('ln').onclick=()=>openLb(li+1);
+let tx=0;$('lb').ontouchstart=e=>tx=e.touches[0].clientX;
+$('lb').ontouchend=e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)openLb(li+(d<0?1:-1))};
+
+/* chapter 6 */
+const L6=[[0,'Today you have to forget about bad things.',''],[2400,'It\'s your day so i want only happy thoughts.',''],[4800,'Now can you smile for me?',''],
+ [9200,'Happy Birthday.','q'],[13000,'There are people who believe in you, even when you don\'t believe in yourself.',''],[18000,'And I\'m one of them.','big']];
+$('one').onclick=()=>{$('one').hidden=true;$('bl').classList.add('old');
+ L6.forEach(([ms,t,c])=>later(()=>{$('st6').querySelectorAll('.ln').forEach(x=>x.classList.add('old'));
+  const p=document.createElement('p');p.className='ln '+c;p.textContent=t;$('st6').appendChild(p);S[6].scrollTo({top:S[6].scrollHeight,behavior:'smooth'})},ms));
+ later(()=>$('to7').hidden=false,21000)};
+$('to7').onclick=()=>go(7);
+H.s6=()=>{$('one').hidden=false;$('to7').hidden=true;$('st6').innerHTML='';$('bl').classList.remove('old')};
+
+/* letter */
+$('env').onclick=()=>{$('env').hidden=true;const p=$('paper');p.classList.add('show');
+ [...p.children].forEach((x,i)=>x.style.animationDelay=(i*.55)+'s');burst(30)};
+H.s7=()=>{$('env').hidden=false;$('paper').classList.remove('show')};
+H.s8=()=>burst(90);
+
+/* music (optional) */
+const au=new Audio();au.loop=true;au.preload='metadata';au.volume=.6;
+au.addEventListener('loadedmetadata',()=>$('mu').hidden=false);
+au.src=CONFIG.music;
+$('mu').onclick=()=>{const on=au.paused;on?au.play().catch(()=>{}):au.pause();$('mu').classList.toggle('play',on);$('mu').setAttribute('aria-pressed',on)};
+
+/* particles */
+const cv=$('c'),x=cv.getContext('2d'),RM=matchMedia('(prefers-reduced-motion:reduce)').matches,
+ COL=['246,236,220','240,163,181','217,178,111'];let W,H2,D,Q=[];
+function rs(){D=Math.min(devicePixelRatio||1,2);W=cv.width=innerWidth*D;H2=cv.height=innerHeight*D}
+rs();addEventListener('resize',rs);
+const mk=(y,temp)=>({x:Math.random()*W,y,r:(temp?1.5+Math.random()*2.5:.6+Math.random()*1.5)*D,vy:-(temp?.8+Math.random()*1.6:.08+Math.random()*.3)*D,vx:(Math.random()-.5)*.3*D,t:Math.random()*6,c:COL[Math.random()*3|0],temp});
+for(let i=0;i<(innerWidth<500?36:70);i++)Q.push(mk(Math.random()*H2));
+function burst(n){if(RM)return;for(let i=0;i<n;i++)Q.push(mk(H2+Math.random()*80*D,true))}
+function frame(){x.clearRect(0,0,W,H2);
+ for(let i=Q.length-1;i>=0;i--){const p=Q[i];p.y+=p.vy;p.x+=p.vx;p.t+=.03;
+  if(p.y<-10){if(p.temp){Q.splice(i,1);continue}p.y=H2+10;p.x=Math.random()*W}
+  x.fillStyle='rgba('+p.c+','+(.25+.45*Math.abs(Math.sin(p.t)))+')';x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fill()}
+ if(!RM)requestAnimationFrame(frame)}
+frame();
+
+go(0);
+</script>
+</body>
+</html>
